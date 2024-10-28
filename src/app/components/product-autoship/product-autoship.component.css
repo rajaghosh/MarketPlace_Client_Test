@@ -1,0 +1,44 @@
+::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #2780a3;
+}
+
+.autoship-body {
+  width: 100%;
+}
+
+.select-grid-row {
+  border-bottom: solid 1px #cccccc;
+}
+
+.btn-shop-modal-autoship {
+  background: #2780a3;
+  color: #fff;
+  padding: 10px;
+  max-width: fit-content;
+  width: 100%;
+  border-radius: 0;
+  min-width: 100px;
+  text-decoration: none;
+  font-size: small;
+  border: solid 1px #2780a3;
+}
+
+.btn-shop-modal-autoship:hover {
+  color: #2780a3;
+  background: #fff;
+  border: solid 1px #2780a3;
+}
+
+.btn-shop-modal-autoship-disabled {
+  background: #cde1e9;
+  color: #fff;
+  padding: 10px;
+  max-width: fit-content;
+  width: 100%;
+  border-radius: 0;
+  min-width: 100px;
+  text-decoration: none;
+  font-size: small;
+  border: 0px;
+}

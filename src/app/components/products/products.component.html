@@ -1,0 +1,536 @@
+<div class="container-fluid body_container_1 pt-3 pb-2 pt-sm-3 pb-sm-5 pt-md-3 pb-md-5">
+
+  <div class="bootstrapped" *ngIf="isShowProductCatelog">
+
+    <div class="container" *ngIf="isShowProductCatelog" style="height: 100%;">
+      <div class="row text-center bg-color-img align-items-center">
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 wht-bg">
+
+          <div class="row d-flex align-items-end pb-4 pt-2 ">
+
+            <!--#region PRODUCT IMAGE SHOW WITH ADD TO CART BUTTON  -->
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 pl-2 pr-2 custom_padding"
+              *ngFor="let product of resultDataList">
+              <div class="product">
+                <a href="/productlist?product={{product.Id}}" class="productTitleLine">
+
+                  <div class="product_img d-md-flex flex-md-column justify-content-md-center">
+                    <img src="{{productInternal.uriProductLocationCloud}}{{product.ImagePath}}" alt=""
+                      class="img-fluid">
+                  </div>
+                  <h3 class="product_title mt-4 mb-0">{{productInternal.FuncGetNamePartFromNameString(product.Name)}}:
+                    <br /><span>{{productInternal.FuncGetPricePartFromNameString(product.Name)}}</span>
+                  </h3>
+                </a>
+              </div>
+              <div class="AddToCart w-100">
+                <a href="javascript:void(0)" class="btn-shop" (click)="OpenSubscriptionDialog(product)">
+                  Add to Cart</a><br />
+
+              </div>
+            </div>
+            <div class=" col-6 col-sm-6 col-md-4 col-lg-3 pl-2 pr-2 custom_padding blankCategoryPage"
+              *ngIf="isEmptyPageLoaded == 1">
+              <p style="font-size: 50px; font-weight: 900; text-align: center;">COMING SOON</p>
+            </div>
+            <div class=" col-6 col-sm-6 col-md-4 col-lg-3 pl-2 pr-2 custom_padding blankCategoryPage"
+              *ngIf="isEmptyPageLoaded == 0">
+              <p style="font-size: 50px; font-weight: 900; text-align: center;"></p>
+            </div>
+            <!--#endregion  -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <!-- #region PRODUCT DESCRIPTION DETAILS SEPERATE PAGE-->
+  <div class="bootstrapped" *ngIf="!isShowProductCatelog">
+    <div class="container-fluid body_container_1 pb-2 pb-sm-5 pb-md-5" *ngIf="!isShowProductCatelog">
+      <div class="">
+        <div class="container" style="padding-left: 0px !important; padding-right: 0px !important;">
+          <div class="row bg-color-img align-items-center">
+            <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 wht-bg"> -->
+            <div class="wht-bg p-0">
+              <div class="row d-flex align-items-start product_details">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 start pb-2">
+
+                  <a href="javascript:void(0)" style="float: left; position: relative; left:-6px;"
+                    (click)="EnableProductCatelog()">
+                    <img class="img-fluid" src="../../../assets/images/back-arrow.svg" alt="" style="height: 50px;">
+                  </a>
+
+                  <!-- <a href="javascript:void(0)" style="float: right; position: relative; left:-6px;">
+                    <img class="img-fluid" src="../../../assets/images/left-arrow-product.svg" alt=""
+                      style="height: 50px;">
+                  </a>
+                  <a href="javascript:void(0)" style="float: right; position: relative; left:-6px;">
+                    <img class="img-fluid" src="../../../assets/images/right-arrow-product.svg" alt=""
+                      style="height: 50px;">
+                  </a> -->
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 end">
+
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                  <div class="text-center" *ngIf="productDescriptionImages.length > 1">
+                    <ngb-carousel *ngIf="productDescriptionImages" [showNavigationArrows]="true"
+                      [showNavigationIndicators]="true">
+                      <ng-template ngbSlide *ngFor="let img of productDescriptionImages; index as i">
+
+                        <div class="picsum-img-wrapper ">
+                          <img [src]="img.path" alt="Random first slide" style="height: 100%; width: 100%; " />
+                        </div>
+                      </ng-template>
+
+                    </ngb-carousel>
+                  </div>
+                  <div class="text-center" *ngIf="productDescriptionImages.length == 1">
+
+                    <div class="picsum-img-wrapper ">
+                      <img [src]="productDescriptionImages[0].path" alt="Random first slide"
+                        style="height: 90%; width: 90%; " />
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 product_details">
+
+                  <h3 class="product_title mt-0 mb-4 desktop_view">{{productDescriptionObj.Name}}</h3>
+
+                  <div class="price_tag mb-4 col-xl-12  col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                    *ngIf="(currentSubscripion.length > 1)">
+                    <mat-radio-group class="product_subscription_radio_group" [(ngModel)]="selectedSubscription">
+                      <mat-radio-button class="product_subscription_radio_button"
+                        *ngFor="let subscription of currentSubscripion" [value]="subscription">
+
+                        <div *ngIf="IsMainProductSubscription(subscription.SubscriptionId)">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+                                <!-- <div class="row px-1">
+                                  <span style="font-weight: 500;" class="p-0">[Regular Order]</span> Price -
+                                  {{affliateDiscount}}
+                                </div> -->
+
+
+                                <div class="row px-1" *ngIf="affliateDiscount == 0">
+                                  <span style="font-weight: 500;" class="p-0">[Regular Order]</span> Price -
+                                  ${{subscription.Price?.toFixed(2)}}
+                                </div>
+
+                                <div class="row px-1" *ngIf="affliateDiscount > 0">
+                                  <span style="font-weight: 500;" class="p-0">[Regular Order] Price -
+                                    <span
+                                      style="text-decoration: line-through; padding: 0 8px; color: gray;">{{subscription.Price?.toFixed(2)}}</span>
+                                    ${{GetAffliateCodeAppliedPrice(subscription.Price,affliateDiscount).toFixed(2)}}
+                                  </span>
+                                </div>
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="!IsMainProductSubscription(subscription.SubscriptionId)">
+                          <div class="container px-3">
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6"
+                                style="white-space: normal; margin-bottom: 5px;">
+                                <span style="font-weight: 500;">[Subscription]</span> : {{subscription.CycleValue}} Time
+                                per
+                                {{subscription.CycleType.replace("ly","")}}
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              </div>
+
+                            </div>
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">Price :
+                                {{subscription.DiscountPercentage}}% Off <span
+                                  style="text-decoration: line-through; padding: 0 8px; color: gray;">{{subscription.DisplayPrice.toFixed(2)}}</span>
+                                ${{productInternal.FuncGetDiscountedPrice(subscription.DisplayPrice,subscription.DiscountPercentage)}}
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </mat-radio-button>
+                    </mat-radio-group>
+
+                  </div>
+
+                  <div class="price_tag mb-4 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6"
+                    *ngIf="currentSubscripion!= undefined && currentSubscripion.length==1">
+
+                    <!--                     
+                    [Regular Order] - ${{currentSubscripion[0].Price?.toFixed(2)}} -->
+
+                    <!-- <span style="font-weight: 500;" class="p-0">[Regular Order]</span> Price -
+                    {{affliateDiscount}} -->
+
+                    <div class="row px-1" *ngIf="affliateDiscount == 0">
+                      <span style="font-weight: 500;" class="p-0">[Regular Order] -
+                        ${{currentSubscripion[0].Price?.toFixed(2)}}
+                      </span>
+                    </div>
+
+                    <div class="row px-1" *ngIf="affliateDiscount > 0">
+                      <span style="font-weight: 500;" class="p-0">[Regular Order]
+                        <span
+                          style="text-decoration: line-through; padding: 0 8px; color: gray;">{{currentSubscripion[0].Price?.toFixed(2)}}</span>
+                        ${{GetAffliateCodeAppliedPrice(currentSubscripion[0].Price,affliateDiscount).toFixed(2)}}
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <div>
+                    <p class="AddToCartButton mb-3" style="text-align: left;">
+                      <!-- !(COLOR + SIZE) + !SUBSCRIPTION -->
+                      <a href="javascript:void(0)" class="AddToCartButton btn-shop-modal"
+                        *ngIf="!(subscriptionMainProduct.ProductSubscriptions.length > 0) && !(subscriptionMainProduct.SelectedColors.length>0 ||subscriptionMainProduct.SelectedSizes.length>0 )"
+                        (click)="AddProductToCart(subscriptionMainProduct)" data-bs-toggle="modal"
+                        data-bs-target="#CartModal">
+                        Add To Cart
+                      </a>
+
+                      <!-- !(COLOR + SIZE) + SUBSCRIPTION -->
+                      <a href="javascript:void(0)" class="AddToCartButton btn-shop-modal"
+                        *ngIf="(subscriptionMainProduct.ProductSubscriptions.length > 0) && !(subscriptionMainProduct.SelectedColors.length>0 ||subscriptionMainProduct.SelectedSizes.length>0 )"
+                        (click)="SubmitSelectedSubscriptionToCart(subscriptionMainProduct)" data-bs-toggle="modal"
+                        data-bs-target="#CartModal">
+                        Add To Cart
+                      </a>
+
+                      <!-- (COLOR + SIZE) + !SUBSCRIPTION-->
+                      <a href="javascript:void(0)" class="AddToCartButton btn-shop-modal"
+                        *ngIf="!(subscriptionMainProduct.ProductSubscriptions.length > 0) && (subscriptionMainProduct.SelectedColors.length>0 ||subscriptionMainProduct.SelectedSizes.length>0 )"
+                        (click)="OpenSubscriptionDialog(subscriptionMainProduct)">
+                        Add to Cart</a>
+                      &nbsp;
+
+                      <!-- (COLOR + SIZE) + SUBSCRIPTION-->
+                      <a href="javascript:void(0)" class="AddToCartButton btn-shop-modal"
+                        *ngIf="(subscriptionMainProduct.ProductSubscriptions.length > 0) && (subscriptionMainProduct.SelectedColors.length>0 ||subscriptionMainProduct.SelectedSizes.length>0 )"
+                        (click)="OpenSubscriptionDialog(subscriptionMainProduct)">
+                        Add to Cart</a>
+                      &nbsp;
+
+                      <a href="javascript:void(0)" class="BuyNowButton btn-shop-modal"
+                        (click)="SubmitSelectedSubscriptionToCart(subscriptionMainProduct)" data-bs-target="#CartModal"
+                        data-bs-toggle="modal">
+                        Buy Now
+                      </a>
+                    </p>
+                  </div>
+
+
+
+
+
+
+
+                  <div class="pb-2">
+                    <!-- </div>class="details_contain clearfix outer"> -->
+                    <p class="mb-3"><b>Product Description</b></p>
+                    <div [innerHTML]="productDescriptionObj.ProductDesc" align="justify">
+                    </div>
+
+
+
+                    <div class="accordion" id="accordionExample">
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Ingredients
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                          data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <div [innerHTML]="productDescriptionObj.Ingredients">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Suggested Use
+                          </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                          data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <div [innerHTML]="productDescriptionObj.SuggestedUse">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Warnings
+                          </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                          data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <div [innerHTML]="productDescriptionObj.Warnings">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+</div>
+
+<!-- Cart Modal -->
+<div class="modal fade modal_design" id="ProductSubscriptionModal" aria-hidden="true" aria-labelledby="CartModalLabel"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <!-- <div class="table-responsive1" id="cartContainer"> -->
+        <div id="cartContainer">
+          <table class="cart__table" id="cartTable">
+            <thead>
+              <tr>
+                <th>{{productInternal.FuncGetNamePartFromNameString(subscriptionMainProduct.Name)}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="px-2">
+
+                    <mat-radio-group class="product_subscription_radio_group" [(ngModel)]="selectedSubscription">
+
+                      <mat-radio-button class="product_subscription_radio_button"
+                        *ngFor="let subscription of currentSubscripion" [value]="subscription">
+
+                        <div *ngIf="IsMainProductSubscription(subscription.SubscriptionId)">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row px-1">
+                                  <span style="font-weight: 500;" class="p-0">[Regular Order]</span> Price -
+                                  ${{subscription.Price}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="!IsMainProductSubscription(subscription.SubscriptionId)">
+                          <div class="container px-3">
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6"
+                                style="white-space: normal; margin-bottom: 5px;">
+                                <span style="font-weight: 500;">[Subscription]</span> : {{subscription.CycleValue}} Time
+                                per
+                                {{subscription.CycleType.replace("ly","")}}
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              </div>
+
+                            </div>
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">Price :
+                                {{subscription.DiscountPercentage}}% Off <span
+                                  style="text-decoration: line-through; padding: 0 8px; color: gray;">{{subscription.DisplayPrice.toFixed(2)}}</span>
+                                ${{productInternal.FuncGetDiscountedPrice(subscription.DisplayPrice,
+                                subscription.DiscountPercentage)}}
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </mat-radio-button>
+                    </mat-radio-group>
+
+                  </div>
+                </td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn-shop-modal" data-bs-toggle="modal" (click)="GoToProductId(subscriptionMainProduct.Id)"
+          data-bs-dismiss="modal">
+          Product Description</button>
+
+        <button class="btn-shop-modal" data-bs-target="#CartModal" data-bs-toggle="modal"
+          (click)="SubmitSelectedSubscriptionToCart(subscriptionMainProduct)" data-bs-dismiss="modal">
+          Place Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--#endregion  -->
+
+<!-- Cart Color And Size Modal -->
+<div class="modal fade modal_design" id="ProductColorsSizeModal" aria-hidden="true" aria-labelledby="CartModalLabel1"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Product Color-Size</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div>
+        <!-- class="modal-body"> -->
+
+        <div class="table-responsive" style="overflow-y: hidden; padding: 10px;">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="height:150px;">
+                    <div class="col-12 col-sm-12 col-lg-12">
+                      <div class="row m-0 ">
+                        <div class="col text-end">
+                          <mat-label>Color : </mat-label>
+                          <mat-form-field appearance="fill">
+                            <select matNativeControl required (change)="UpdateProductColor(productColorsValue.value)"
+                              #productColorsValue>
+                              <option *ngFor="let colors of productColors;" [ngValue]="colors.Id">{{colors.Name}}
+                              </option>
+                            </select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!-- <div style="height:10px;"></div> -->
+
+                      <div class="row m-0 ">
+                        <div class="col  text-end">
+                          <mat-label>Size : </mat-label>
+
+                          <mat-form-field appearance="fill">
+                            <select matNativeControl required (change)="UpdateProductSize(productSizesValue.value)"
+                              #productSizesValue>
+                              <option *ngFor="let sizes of productSizes;" [ngValue]="sizes.Id">{{sizes.Name}}</option>
+                            </select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="height:50px;">
+                    <div style="height: 10px;"></div>
+                    <!-- FOR ANY SUBSCRIPTION FROM MAIN SCREEN-->
+                    <button class="btn-shop-modal" [disabled]="!isProductColorSizeButtonEnable" data-bs-toggle="modal"
+                      data-bs-dismiss="modal" data-bs-target="#ProductSubscriptionModal"
+                      *ngIf="(currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0) && !isSubcriptionOpenedFromDescription"
+                      (click)="ShowSubscriptions(currentProductForColorSize)">
+                      Add To Cart</button>
+
+                    <!-- FOR ANY SUBSCRIPTION FROM DESCRIPTION SCREEN-->
+                    <button class="btn-shop-modal" [disabled]="!isProductColorSizeButtonEnable" data-bs-toggle="modal"
+                      data-bs-dismiss="modal" data-bs-target="#ProductSubscriptionModal"
+                      *ngIf="(currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0) && isSubcriptionOpenedFromDescription"
+                      (click)="ShowSubscriptions(currentProductForColorSize)">
+                      Add To Cart</button>
+
+
+                    <!-- FOR NO SUBSCRIPTION -->
+                    <button class="btn-shop-modal" [disabled]="!isProductColorSizeButtonEnable"
+                      (click)="AddProductToCart(currentProductForColorSize)" data-bs-dismiss="modal"
+                      data-bs-toggle="modal" data-bs-target="#CartModal"
+                      *ngIf="!(currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0)">
+                      Add To Cart</button>
+
+                    <label *ngIf="!isProductColorSizeButtonEnable">&nbsp;(Please select values)</label>
+                  </div>
+                </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--#endregion  -->
+
+
+<a id="back_button"></a>

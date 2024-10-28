@@ -1,0 +1,6 @@
+@import "../../../app.component.css";
+
+.stickyFooter {
+    position: absolute;
+    bottom: 0px;
+}

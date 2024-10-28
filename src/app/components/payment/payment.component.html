@@ -1,0 +1,416 @@
+<br />
+<div class="container-fluid col-lg-12 col-md-12 col-sm-12 text-end" style="width: 90%;">
+    <!-- <a href="/productlist?category=All" style="float: right;" class="BuyNowButton btn btn-shop mb-4">
+        Return to Products
+    </a> -->
+    <button class="btn-shop-modal" (click)="ReturnToProducts()">Return&nbsp;To&nbsp;Products</button>
+</div>
+<div class="container-fluid col-lg-12 col-md-12 col-sm-12" style="width: 90%;">
+    <!-- <div class="mb-3">
+        <h2>Customer&nbsp;Details</h2>
+    </div> -->
+</div>
+<form [formGroup]="formGroupProductCheckOutAddress">
+    <div class="container-fluid pt-5 pb-5 body_container" style="width: 90%; background-color: white;">
+
+        <div class="row">
+
+            <!-- #region CARD DETAILS -->
+            <div class="col-12 col-sm-4 col-lg-4">
+                <div class="row m-0">
+
+                    <div class="mb-3">
+                        <h4>Card Details</h4>
+                    </div>
+
+
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Card Holder Name<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="50" inputmode="text" placeholder="Type name"
+                            formControlName="CardDetailsCardHolderName" #nameInput>
+
+                        <mat-error *ngIf="checkError('CardDetailsCardHolderName', 'required')">Card Holder Name is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCardHolderName', 'maxlength')">Card Holder Name must
+                            not exceed 50 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Card Number<span style="color: red;">*</span></mat-label>
+                        <input matInput (keydown)="DisallowSpace($event)" placeholder="Enter Card number..."
+                            inputmode="numeric" formControlName="CardDetailsCardNumber">
+                        <mat-error *ngIf="checkError('CardDetailsCardNumber', 'required')">Card number is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCardNumber', 'pattern')">Only numerical
+                            digits</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCardNumber', 'minlength')">Card No. must be of 16
+                            digits
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCardNumber', 'maxlength')">Card No. must not exceed
+                            16 digits</mat-error>
+
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>CVC<span style="color: red;">*</span></mat-label>
+                        <input matInput placeholder="CVC" formControlName="CardDetailsCVC" inputmode="numeric">
+                        <mat-error *ngIf="checkError('CardDetailsCVC', 'required')">CVC is required</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCVC', 'pattern')">CVC numerical digits allowed
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCVC', 'maxlength')">CVC length should be less than or
+                            equals to four.</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Expiry Month<span style="color: red;">*</span></mat-label>
+                        <input matInput placeholder="MM" formControlName="CardDetailsExpiryMonth" inputmode="numeric"
+                            min="1" max="12">
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'required')">Expiry month is required
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'pattern')">Only numerical digits allowed
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'maxlength')">Expiry month length should
+                            be equals to 2</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'minlength')">Expiry month length should
+                            be equals to 2</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'min')">Expiry month should be between
+                            1-12
+                            months
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'max')">Expiry month should be between
+                            1-12
+                            months
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Expiry Year<span style="color: red;">*</span></mat-label>
+                        <input matInput placeholder="YYYY" formControlName="CardDetailsExpiryYear" inputmode="numeric">
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'required')">Expiry year is required
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'pattern')">Only numerical digits allowed
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'minlength')">Expiry Year length should be
+                            equals to four</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'maxlength')">Expiry Year length should be
+                            equals to four</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Amount($)</mat-label>
+                        <input matInput class="mat-form-field-readonly" formControlName="CardDetailsAmount"
+                            autocomplete="off" readonly="readonly">
+                        <mat-error *ngIf="checkError('CardDetailsAmount', 'required')">Amount is required
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <div class="form-group" *ngIf="isNormalProductPayment">
+                        <mat-form-field appearance="fill" class="pt-3">
+                            <mat-label>Promocode</mat-label>
+                            <input matInput formControlName="CardDetailsPromoCode" autocomplete="off" inputmode="text"
+                                #promocodeValue>
+                        </mat-form-field>&nbsp;
+                        
+                        <a href="javascript:void(0)" class="btn-shop-modal-disabled" *ngIf="isPromocodeButtonDisabled">
+                            Apply</a>
+                        <a href="javascript:void(0)" class="btn-shop-modal"
+                            (click)="ApplyPromocodeByName(promocodeValue.value)" *ngIf="!isPromocodeButtonDisabled">
+                            Apply</a>
+
+                        <div class="pl-2 pr-2 pt-2">
+                            <label>{{promoCodeInvalidLabel}}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" class="pt-2" *ngIf="isNormalProductPayment">
+                        <label
+                            class="form-label"><br /><b>Discount:&nbsp;${{discountAmountShow}}&nbsp;({{discountedPercent}}%)</b></label>
+                    </div>
+
+                    <div class="pt-3" style="width: 100%">
+                        <mat-form-field appearance="fill" class="pt-0" style="width:100%">
+                            <mat-label>Shipment Charge</mat-label>
+                            <input matInput class="mat-form-field-readonly" formControlName="CardDetailsShipmentCharge"
+                                autocomplete="off" readonly="readonly">
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-label"><b>Total:&nbsp;</b></label>
+                        <mat-form-field appearance="standard">
+                            <!-- <mat-label></mat-label> -->
+                            <input matInput formControlName="CardDetailsTotalPrice" autocomplete="off"
+                                class="mat-form-field-readonly" readonly="readonly">
+                        </mat-form-field>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region SHIPPING DETAILS -->
+            <div class="col-12 col-sm-4 col-lg-4">
+                <div class="row m-0">
+
+                    <div class="mb-3">
+                        <h4>Shipping Details</h4>
+                    </div>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>First Name<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="text" placeholder="Type name"
+                            formControlName="ShippingDetailsFirstName" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsFirstName', 'required')">First Name is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsFirstName', 'maxlength')">First Name cannot be more
+                            than 50 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Last Name<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="text" placeholder="Type name"
+                            formControlName="ShippingDetailsLastName" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsLastName', 'required')">Last Name is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsLastName', 'maxlength')">Last Name cannot be more
+                            than 50 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Email <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="email" placeholder="Type name"
+                            formControlName="ShippingDetailsEmail" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsEmail', 'required')">Email is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsEmail', 'email')">Email address
+                            not proper</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsEmail', 'maxlength')">Email address cannot be more
+                            than 100 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Phone <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsPhoneNo" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsPhoneNo', 'required')">Phone is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsPhoneNo', 'maxlength')">Phone cannot be more
+                            than 20 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Shipping Address 1 <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="500" inputmode="text" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingAddress1" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingAddress1', 'required')">Shipping Address 1
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingAddress1', 'maxlength')">Shipping Address 1
+                            cannot be more than 200 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Shipping Address 2 <span style="color: red;"></span></mat-label>
+                        <input matInput maxlength="500" inputmode="text" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingAddress2" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingAddress2', 'maxlength')">Shipping Address 2
+                            cannot be more than 200 characters</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Shipping City<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="text" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingCity" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingCity', 'required')">Shipping City
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingCity', 'maxlength')">Shipping City
+                            cannot be more than 50 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Shipping State<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="text" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingState" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingState', 'required')">Shipping State
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingState', 'maxlength')">Shipping State
+                            cannot be more than 50 characters</mat-error>
+                    </mat-form-field>
+
+
+                    <!-- <mat-form-field appearance="fill" hintLabel="Country name required"> -->
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Shipping Country<span style="color: red;"></span></mat-label>
+                        <mat-select matNativeControl name="country" formControlName="ShippingDetailsShippingCountry"
+                            #choosedValue (valueChange)="GetShippingPriceByCountry(choosedValue.value)" required>
+                            <mat-option *ngFor="let country of countryList" [value]="country.Value">
+                                {{country.Value}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingCountry', 'required')">Shipping State
+                            is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Zip Code<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="10" inputmode="numeric" placeholder="Type name"
+                            formControlName="ShippingDetailsZipcode" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsZipcode', 'required')">Zip Code
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('ShippingDetailsZipcode', 'maxlength')">Zip Code
+                            cannot be more than 10 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>How did you find out about us</mat-label>
+                        <input matInput maxlength="300" inputmode="text" placeholder="Type name"
+                            formControlName="FindAboutUs" #nameInput>
+                        <!-- <mat-error *ngIf="checkError('BillingDetailsZipcode', 'required')">Billing Zip Code
+                            is required</mat-error> -->
+                        <mat-error *ngIf="checkError('FindAboutUs', 'maxlength')">Billing Zip Code
+                            cannot be more than 300 characters</mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region BILLING DETAILS -->
+            <div class="col-12 col-sm-4 col-lg-4">
+                <div class="row m-0">
+
+                    <div class="mb-3 row">
+                        <h4>Billing Details</h4>
+                    </div>
+
+                    <!-- <mat-form-field appearance="fill"> -->
+                    <div style=" vertical-align: middle; word-wrap: break-word;" class="pt-3 pb-3">
+                        <p>
+                            <mat-slide-toggle class="pt-3 " formControlName="BillingDetailIsSameAsShippingAddress"
+                                (change)="checkToggle()">
+                                Same As Shipping Address</mat-slide-toggle>
+                        </p>
+                    </div>
+                    <!-- </mat-form-field> -->
+
+                    <mat-form-field appearance="fill" class="pt-4">
+                        <mat-label>Billing Address <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="500" inputmode="text" placeholder="Type name"
+                            formControlName="BillingDetailsBillingAddress" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsBillingAddress', 'required')">Billing Address
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('BillingDetailsBillingAddress', 'maxlength')">Billing Address
+                            cannot be more than 400 characters</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Billing City<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="text" placeholder="Type name"
+                            formControlName="BillingDetailsCity" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsCity', 'required')">Billing City
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('BillingDetailsCity', 'maxlength')">Billing City
+                            cannot be more than 50 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Billing State<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="text" placeholder="Type name"
+                            formControlName="BillingDetailsState" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsState', 'required')">Billing State
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('BillingDetailsState', 'maxlength')">Billing State
+                            cannot be more than 50 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="pt-3">
+                        <mat-label>Billing Zip Code<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="10" inputmode="numeric" placeholder="Type name"
+                            formControlName="BillingDetailsZipcode" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsZipcode', 'required')">Billing Zip Code
+                            is required</mat-error>
+                        <mat-error *ngIf="checkError('BillingDetailsZipcode', 'maxlength')">Billing Zip Code
+                            cannot be more than 10 characters</mat-error>
+                    </mat-form-field>
+
+
+
+
+                </div>
+
+
+                <div class="row m-0 pt-3" *ngIf="isSubscriptionRelatedProductPresent">
+
+                    <div class=" col-1"></div>
+                    <div class=" col-11" align="justify">
+                        <div class="row">
+                            <ul>
+                                <li>For subscription, additional shipping charges will be applied: ${{shipmentCharge}}
+                                </li>
+                                <li>For subscription transaction, your card details will be saved.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class=" col-1"></div>
+                    <div class=" col-1">
+                        <mat-checkbox id="" (change)="PaymentConditionSelect($event)"></mat-checkbox>&nbsp;
+                    </div>
+                    <div class=" col-10" align="left">
+                        <span>I agree</span>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- #endregion -->
+
+        </div>
+
+
+
+        <!-- THIS BUTTON SET CAN ALSO BE SET OUTSIDE OF mat-dialog-content -->
+        <br /><br />
+        <div class="container-fluid modal-footer">
+
+            <mat-dialog-actions *ngIf="isSubscriptionRelatedProductPresent">
+                <button class="btn-shop-modal-light-inverted-payment" (click)="close()">Close</button>&nbsp;
+                <a href="javascript:void(0)" class="btn-shop-modal-disabled-payment" (click)="DisabledPayNowActions()"
+                    *ngIf="(!formGroupProductCheckOutAddress.valid || isCartEmpty) || !isPaymentConditionSelected">
+                    &nbsp;&nbsp;Pay&nbsp;Now&nbsp;&nbsp;</a>
+                <button class="btn-shop-modal-payment" type="submit" (click)="MakePayment()"
+                    *ngIf="(formGroupProductCheckOutAddress.valid && !isCartEmpty) && isPaymentConditionSelected">
+                    &nbsp;&nbsp;Pay&nbsp;Now&nbsp;&nbsp;</button>
+
+            </mat-dialog-actions>
+
+            <mat-dialog-actions *ngIf="!isSubscriptionRelatedProductPresent">
+                <button class="btn-shop-modal-light-inverted-payment" (click)="close()">Close</button>&nbsp;
+                <a href="javascript:void(0)" class="btn-shop-modal-disabled-payment" (click)="DisabledPayNowActions()"
+                    *ngIf="(!formGroupProductCheckOutAddress.valid || isCartEmpty)">
+                    &nbsp;&nbsp;Pay&nbsp;Now&nbsp;&nbsp;</a>
+                <button class="btn-shop-modal-payment" type="submit" (click)="MakePayment()"
+                    *ngIf="(formGroupProductCheckOutAddress.valid && !isCartEmpty)">
+                    &nbsp;&nbsp;Pay&nbsp;Now&nbsp;&nbsp;</button>
+
+            </mat-dialog-actions>
+
+        </div>
+
+
+
+
+    </div>
+    <!-- </form> -->
+
+
+</form>
+<br />

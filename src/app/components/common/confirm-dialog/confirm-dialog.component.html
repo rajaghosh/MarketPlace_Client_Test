@@ -1,0 +1,29 @@
+<mat-dialog-content>
+	<p>
+		{{message}}
+	</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+	<div class="container">
+		<div class="row" *ngIf="isDisplayOKButton() ||isDisplayCancelButton() || isOtherButtonDisplay" >
+			<div class="col-md-12 pl-1 pr-1" *ngIf="isDisplayOKButton() ||isDisplayCancelButton()" >
+				<button mat-raised-button (click)="onConfirmClick()" tabindex="1" class="pt-1 btn-shop-modal"
+					*ngIf="isDisplayOKButton()" >{{confirmButtonText}}</button>
+
+				<button mat-raised-button mat-dialog-close tabindex="-1" class="pt-1 btn-shop-modal"
+					*ngIf="isDisplayCancelButton()" >{{cancelButtonText}}</button>
+			</div>
+			<div class="col-md-12 text-center pt-2 pl-1 pr-1" *ngIf="isOtherButtonDisplay">
+				<button mat-raised-button class="btn-shop-modal" (click)="onOtherClick()" tabindex="1"
+					*ngIf="isOtherButtonDisplay">{{otherButtonText}}</button>
+			</div>
+		</div>
+		<div class="row" *ngIf="spinnerOn">
+			<div class="col-md-12">
+				<div align="center" *ngIf="spinnerOn">
+					<mat-spinner diameter="40" color="ThemePalette"></mat-spinner>
+				</div>
+			</div>
+		</div>
+	</div>
+</mat-dialog-actions>

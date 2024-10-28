@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+  <link href="./styles.css" rel="stylesheet">
+  <title>Dr Stella Md</title>
+
+  <script src="https://www.wheelofpopups.com/api/v10638/widget.js" type="text/javascript" defer="defer"></script>
+
+  <script async src="//static.getclicky.com/101390105.js"></script>
+  <noscript>
+    <p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101390105ns.gif" /></p>
+  </noscript>
+
+  <style type="text/css">
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Spartan:500,600");
+  </style>
+  <!-- Required angular tags -->
+  <base href="/">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<!--<body class="mat-typography">-->
+
+<body>
+  <app-root></app-root>
+</body>
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+  integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+  integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</html>
+
+
+<script src="//code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    var itemsMainDiv = ('.MultiCarousel');
+    var itemsDiv = ('.MultiCarousel-inner');
+    var itemWidth = "";
+
+    $('.leftLst, .rightLst').click(function () {
+      var condition = $(this).hasClass("leftLst");
+      if (condition)
+        click(0, this);
+      else
+        click(1, this)
+    });
+
+    ResCarouselSize();
+
+
+
+
+    $(window).resize(function () {
+      ResCarouselSize();
+    });
+
+    //this function define the size of the items
+    function ResCarouselSize() {
+      var incno = 0;
+      var dataItems = ("data-items");
+      var itemClass = ('.item');
+      var id = 0;
+      var btnParentSb = '';
+      var itemsSplit = '';
+      var sampwidth = $(itemsMainDiv).width();
+      var bodyWidth = $('body').width();
+      $(itemsDiv).each(function () {
+        id = id + 1;
+        var itemNumbers = $(this).find(itemClass).length;
+        btnParentSb = $(this).parent().attr(dataItems);
+        itemsSplit = btnParentSb.split(',');
+        $(this).parent().attr("id", "MultiCarousel" + id);
+
+
+        if (bodyWidth >= 1200) {
+          incno = itemsSplit[3];
+          itemWidth = sampwidth / incno;
+        }
+        else if (bodyWidth >= 992) {
+          incno = itemsSplit[2];
+          itemWidth = sampwidth / incno;
+        }
+        else if (bodyWidth >= 768) {
+          incno = itemsSplit[1];
+          itemWidth = sampwidth / incno;
+        }
+        else {
+          incno = itemsSplit[0];
+          itemWidth = sampwidth / incno;
+        }
+        $(this).css({ 'transform': 'translateX(0px)', 'width': itemWidth * itemNumbers });
+        $(this).find(itemClass).each(function () {
+          $(this).outerWidth(itemWidth);
+        });
+
+        $(".leftLst").addClass("over");
+        $(".rightLst").removeClass("over");
+
+      });
+    }
+
+
+    //this function used to move the items
+    function ResCarousel(e, el, s) {
+      var leftBtn = ('.leftLst');
+      var rightBtn = ('.rightLst');
+      var translateXval = '';
+      var divStyle = $(el + ' ' + itemsDiv).css('transform');
+      var values = divStyle.match(/-?[\d\.]+/g);
+      var xds = Math.abs(values[4]);
+      if (e == 0) {
+        translateXval = parseInt(xds) - parseInt(itemWidth * s);
+        $(el + ' ' + rightBtn).removeClass("over");
+
+        if (translateXval <= itemWidth / 2) {
+          translateXval = 0;
+          $(el + ' ' + leftBtn).addClass("over");
+        }
+      }
+      else if (e == 1) {
+        var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+        translateXval = parseInt(xds) + parseInt(itemWidth * s);
+        $(el + ' ' + leftBtn).removeClass("over");
+
+        if (translateXval >= itemsCondition - itemWidth / 2) {
+          translateXval = itemsCondition;
+          $(el + ' ' + rightBtn).addClass("over");
+        }
+      }
+      $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+    }
+
+    //It is used to get some elements from btn
+    function click(ell, ee) {
+      var Parent = "#" + $(ee).parent().attr("id");
+      var slide = $(Parent).attr("data-slide");
+      ResCarousel(ell, Parent, slide);
+    }
+
+  });
+
+</script>

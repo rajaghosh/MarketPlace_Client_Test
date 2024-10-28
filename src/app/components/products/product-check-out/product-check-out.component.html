@@ -1,0 +1,283 @@
+<div class="container-fluid">
+    <h2>{{productCheckOutTitle}}</h2>
+</div>
+
+<mat-dialog-content [formGroup]="formGroupProductCheckOutAddress">
+    <div class="container-fluid pt-5 pb-5 body_container">
+
+        <div class="row">
+
+            <!-- #region CARD DETAILS -->
+            <div class="col-12 col-sm-4 col-lg-4">
+                <div class="row m-0">
+
+                    <div class="mb-3">
+                        <h4>Card Details</h4>
+                    </div>
+
+
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Card Holder Name<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="CardDetailsCardHolderName" #nameInput>
+
+                        <mat-error *ngIf="checkError('CardDetailsCardHolderName', 'required')">Card number is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Card Number<span style="color: red;">*</span></mat-label>
+                        <input matInput (keydown)="DisallowSpace($event)" placeholder="Enter Card number..."
+                            formControlName="CardDetailsCardNumber">
+                        <mat-error *ngIf="checkError('CardDetailsCardNumber', 'required')">Card number is
+                            required</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCardNumber', 'pattern')">Only numerical digits
+                            allowed</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>CVC<span style="color: red;">*</span></mat-label>
+                        <input matInput placeholder="CVC" formControlName="CardDetailsCVC">
+                        <mat-error *ngIf="checkError('CardDetailsCVC', 'required')">CVC is required</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCVC', 'pattern')">Only numerical digits allowed
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsCVC', 'maxlength')">CVC length should be less than or
+                            equals to four.</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Expiry Month<span style="color: red;">*</span></mat-label>
+                        <input matInput placeholder="MM" formControlName="CardDetailsExpiryMonth">
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'required')">Expiry month is required
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'pattern')">only numerical digits allowed
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'maxlength')">Expiry month length should
+                            be equals to 2</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryMonth', 'minlength')">Expiry month length should
+                            be equals to 2</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Expiry Year<span style="color: red;">*</span></mat-label>
+                        <input matInput placeholder="YYYY" formControlName="CardDetailsExpiryYear">
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'required')">Expiry year is required
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'pattern')">only numerical digits allowed
+                        </mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'minlength')">Expiry Year length should be
+                            equals to four</mat-error>
+                        <mat-error *ngIf="checkError('CardDetailsExpiryYear', 'maxlength')">Expiry Year length should be
+                            equals to four</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Amount($)</mat-label>
+                        <input matInput class="mat-form-field-readonly" formControlName="CardDetailsAmount"
+                            autocomplete="off" readonly="readonly">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Shipment Charge</mat-label>
+                        <input matInput class="mat-form-field-readonly" formControlName="CardDetailsShipmentCharge"
+                            autocomplete="off" readonly="readonly">
+                    </mat-form-field>
+
+
+                    <!-- THERE WILL BE CONDITIONS -->
+                    <!-- <div class="form-group required mb-3">
+                        <label for="" class="form-label">Shipment Charges</label>
+                        <input type="email" class="form-control" id="" placeholder="">
+                    </div> -->
+
+                    <div class="form-group">
+                        <label class="form-label"><b>Total:&nbsp;</b></label>
+                        <mat-form-field appearance="standard">
+                            <!-- <mat-label></mat-label> -->
+                            <input matInput formControlName="CardDetailsTotalPrice" autocomplete="off"
+                                class="mat-form-field-readonly" readonly="readonly">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Promocode</mat-label>
+                        <input matInput formControlName="CardDetailsPromoCode" autocomplete="off">
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region SHIPPING DETAILS -->
+            <div class="col-12 col-sm-4 col-lg-4">
+                <div class="row m-0">
+
+                    <div class="mb-3">
+                        <h4>Shipping Details</h4>
+                    </div>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>First Name<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsFirstName" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsFirstName', 'required')">First Name is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Last Name<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsLastName" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsLastName', 'required')">Last Name is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsEmail" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsEmail', 'required')">Email is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Phone <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsPhoneNo" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsPhoneNo', 'required')">Email is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Shipping Address 1 <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingAddress1" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingAddress1', 'required')">Shipping Address 1
+                            is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Shipping Address 2 <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingAddress2" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingAddress1', 'required')">Shipping Address 2
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Shipping City<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingCity" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingCity', 'required')">Shipping City
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Shipping State<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsShippingState" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsShippingState', 'required')">Shipping State
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" hintLabel="Country name required">
+                        <mat-label>Shipping Country<span style="color: red;">*</span></mat-label>
+                        <mat-select matNativeControl name="country" formControlName="ShippingDetailsShippingCountry">
+                            <mat-option *ngFor="let country of countryList" [value]="country.Value">
+                                {{country.Value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Zip Code<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="ShippingDetailsZipcode" #nameInput>
+                        <mat-error *ngIf="checkError('ShippingDetailsZipcode', 'required')">Zip Code
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region BILLING DETAILS -->
+            <div class="col-12 col-sm-4 col-lg-4">
+                <div class="row m-0">
+
+                    <div class="mb-3 row">
+                        <h4>Billing Details</h4>
+                    </div>
+
+                    <!-- <mat-form-field appearance="fill"> -->
+                    <div style="height: 80px;  vertical-align: middle; word-wrap: break-word;">
+                        <p>
+                            <mat-slide-toggle formControlName="BillingDetailIsSameAsShippingAddress"
+                                (change)="checkToggle()">
+                                Same As Shipping Address</mat-slide-toggle>
+                        </p>
+                    </div>
+                    <!-- </mat-form-field> -->
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Billing Address <span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="BillingDetailsBillingAddress" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsBillingAddress', 'required')">Billing Address
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Billing City<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="BillingDetailsCity" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsCity', 'required')">Billing City
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Billing State<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="BillingDetailsState" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsState', 'required')">Billing State
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Billing Zip Code<span style="color: red;">*</span></mat-label>
+                        <input matInput maxlength="100" inputmode="tel" placeholder="Type name"
+                            formControlName="BillingDetailsZipcode" [readonly]="isBillingDetailsReadonly">
+                        <mat-error *ngIf="checkError('BillingDetailsZipcode', 'required')">Billing Zip Code
+                            is required
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <!-- #endregion -->
+
+        </div>
+    </div>
+    <!-- </form> -->
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button (click)="close()">Close</button>
+    <button mat-raised-button color="primary" type="submit" (click)="save()"
+        [disabled]="!formGroupProductCheckOutAddress.valid">Save</button>
+</mat-dialog-actions>

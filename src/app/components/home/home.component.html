@@ -1,0 +1,507 @@
+<div class="text-center main_banner pb-2">
+    <aol-carousel>
+        <ng-container *ngFor="let item of topImagesCarousal;">
+            <ng-container *carouselItem>
+                <div class="slide">
+                    <a href="{{item.Url}}">
+                        <img src="{{item.Path}}" alt="">
+                    </a>
+                    <!-- <div class="title">{{item.title}}</div> -->
+                </div>
+            </ng-container>
+        </ng-container>
+    </aol-carousel>
+</div>
+
+<!-- ------------------ -->
+
+<div class="container-fluid body_container pt-3 pb-4 pt-sm-5 pb-sm-5 pt-md-4 pb-md-5 ">
+    <div class="container px-0">
+        <app-multi-image-carousal></app-multi-image-carousal>
+    </div>
+</div>
+
+<!-- ------------------ -->
+
+
+
+<div class="container body_container_0_0 pb-3">
+
+    <div class="row text-center">
+        <div class="col-12 col-lg-12 col-md-12 col-sm-12 p-0 ">
+            <a href="{{urlBottomTopLink1}}">
+                <img class="img-fluid" src="../../../assets/images/Vax Detox.png" alt="">
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="container body_container_0_0">
+
+    <div class="row text-center">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12 p-0 overlay_box bg_img_1">
+            <a href="{{urlMidProduct1}}">
+                <img class="img-fluid" src="../../../assets/images/New_Covivites_blank.jpg" alt="">
+            </a>
+            <div class="overlay_txt pe-3 ps-3">
+                <span>CoviVits</span>
+                <p>
+                    Boost your immune system with CoviVits to help keep sickness at bay. Keep viruses away all year
+                    round with CoviVits.
+                </p>
+                <a href="{{urlMidProduct1}}">Shop Now</a>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12 p-0 overlay_box bg_img_3">
+            <a href="{{urlMidProduct2}}">
+                <img class="img-fluid" src="../../../assets/images/New_Bundle_deals.jpg" alt="">
+            </a>
+            <div class="overlay_txt pe-3 ps-3">
+                <span>Supplement Bundles &amp; kits</span>
+                <p>
+                    Shop supplements kits and save on your favorite supplements when you buy our bundle deals.
+                </p>
+                <a href="{{urlMidProduct2}}">Shop Now</a>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12 p-0 overlay_box bg_img_4">
+            <a href="{{urlMidProduct3}}">
+                <img class="img-fluid" src="../../../assets/images/New-Viral-Immune-plus-blank.jpg" alt="">
+            </a>
+            <div class="overlay_txt pe-3 ps-3">
+                <span>Viroimmune plus</span>
+                <p>
+                    NEW! Viroimmune plus is your defense against viral infections and inflammation. Take daily during
+                    infection.
+                </p>
+                <a href="{{urlMidProduct3}}">Shop Now</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container-fluid body_container pt-3 pb-4 pt-sm-5 pb-sm-5 pt-md-4 pb-md-5 ">
+    <div class="container px-0">
+        <div class="row mb-2 mt-2 mb-sm-2 mb-md-2">
+            <div class="col-12">
+                <h1 class="section_title">
+                    <span>Featured Products</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="row text-center FeaturedProducts">
+
+            <div class="col-6 col-md-6 col-lg-3 item" *ngFor="let product of resultDataList">
+                <div class="product">
+                    <div class="product_img d-md-flex flex-md-column justify-content-md-center">
+                        <a href="/productlist?product={{product.Id}}"> <img
+                                src="{{productInternal.uriProductLocationCloud}}{{product.ImagePath}}" alt=""
+                                class="img-fluid"></a>
+                    </div>
+                    <h3 class="product_title mt-4 mb-0">
+                        <span style="height:40px">{{product.Name.split(":")[0]}}</span>
+                        <span>${{product.Price.toFixed(2)}}</span>
+                    </h3>
+                    <div class="star-rating w-100 mt-2">
+                        <span class="fa fa-star" data-rating="1"></span>
+                        <span class="fa fa-star" data-rating="2"></span>
+                        <span class="fa fa-star" data-rating="3"></span>
+                        <span class="fa fa-star" data-rating="4"></span>
+                        <span class="fa fa-star" data-rating="5"></span>
+                        <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                    </div>
+                    <div class="AddToCart w-100 mt-2">
+                        <!-- <a href="/productlist?product={{product.Id}}" class="btn-shop">Add to Cart</a> -->
+                        <a href="javascript:void(0)" class="btn-shop" (click)="OpenSubscriptionDialog(product)">
+                            Add To Cart</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid body_container_img">
+
+    <div class="container">
+
+        <div class="row">
+            <a href="{{urlShopMedicalDevice}}">
+                <div class="col-12 col-md-12 col-lg-12 p-0 text-center toh-img-container shop_medical_devices">
+
+                    <img class="img-fluid mb-2 mb-md-0 pos-md-relative for_desktop"
+                        src="{{homeInternal.uriProductLocationLocal}}Medical_Devices.jpg" alt="">
+                    <img class="img-fluid mb-2 mb-md-0 pos-md-relative for_mobile"
+                        src="{{homeInternal.uriProductLocationLocal}}Medical_Devices1.jpg" alt="">
+
+                    <a href="{{urlShopMedicalDevice}}" class="btn btn-shop">Shop Medical Devices</a>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container-fluid body_container_2 pt-3 pb-2 pt-sm-4 pb-sm-4 pt-md-4 pb-md-4 ">
+
+    <div class="container">
+
+        <div class="row d-flex flex-column flex-sm-row-reverse">
+
+            <div class="col-12 col-md-6 col-lg-6 p-0 text-center toh-img-container">
+                <a href="/autoship-order/">
+                    <img class="img-fluid mb-2 mb-md-0 pos-md-relative"
+                        src="{{homeInternal.uriProductLocationLocal}}Autoship1.png" alt=""
+                        style="max-width: 350px; width: 100%;"></a>
+            </div>
+
+            <div
+                class="col-12 col-md-6 col-lg-6 px-md-5 mt-4 mt-sm-4 mt-md-0 lg-mt-0 xs-mt-0 d-md-flex flex-md-column justify-content-md-center">
+                <h2 class="mb-1 fw-400 text-teal mb-4">IMMUNE BOOST PREFERRED CUSTOMER PROGRAM</h2>
+                <!-- <p class="fw-500 mt-3 mb-3">Here’s a good place! Discover these specially-curated starter kits we’ve created for your individual needs.</p> -->
+                <a href="/autoship-order/" class="btn btn-shop">Get Details</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container-fluid body_container_0 pt-3 pb-2 pt-sm-5 pb-sm-5 pt-md-4 pb-md-5 ">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div
+                class="col-12 col-md-4 col-lg-4 p-0 text-center toh-img-container d-md-flex flex-md-column justify-content-md-center">
+                <a href="{{urlLetAmericaLive}}">
+                    <img class="img-fluid mb-2 mb-md-0 pos-md-relative"
+                        src="{{homeInternal.uriProductLocationLocal}}Let-America-Live-745x1024.png" alt=""
+                        style="max-width: 250px; width: 100%;"></a>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-8 px-md-5 d-md-flex flex-md-column justify-content-md-center">
+                <h2 class="mb-1 fw-400 text-teal mb-4">Let America Live: Exposing the Hidden Agenda Behind the 2020
+                    Pandemic: My Journey</h2>
+                <p class="fw-500 mt-3 mb-3">
+                    This book will expose you to the hidden realities of the media’s silencing and opposition to those
+                    against the Left’s agenda. You will have an increased confidence to stand strong for your beliefs
+                    about your health, faith, and personal life despite what is going on around you.
+                </p>
+                <a href="{{urlLetAmericaLive}}" class="btn btn-shop mt-4">Buy Now</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container-fluid body_container_3 pt-5 pb-5">
+    <span class="span_bg"></span>
+    <div class="container container-bg">
+
+        <div class="row d-flex flex-column flex-sm-row-reverse ">
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 p-0 d-md-flex flex-md-column justify-content-md-center">
+                <a href="https://drstellamd.com/dr-stellas-bio/" target="_blank">
+                    <img src="{{homeInternal.uriProductLocationLocal}}dr1.jpg" class="img-fluid" alt="">
+                </a>
+            </div>
+
+            <div
+                class="col-lg-6 col-md-12 col-sm-12 col-12 p-5 d-md-flex flex-md-column justify-content-md-center wht-bg rt-wht">
+                <h2 class="">
+                    <div>Meet Dr. Stella Immanuel</div>
+                </h2>
+                <p class="p-nd mt-3 mb-3">
+                    A woman of science and the spirit this site displays the different aspects of Dr. Immanuel.
+                </p>
+                <p class="p-st mb-4">
+                    Some of you know me as one of American frontline doctors advocating for early treatment of covid19,
+                    others as a pastor and deliverance minister, some as a writer and businesswoman others as a mentor.
+                    Whatever part I’ve been privileged by God to play in your life can be found by clicking on the
+                    appropriate area below. God bless you as you browse.
+                </p>
+                <a href="https://drstellamd.com/dr-stellas-bio/" target="_blank" class="btn btn-shop">
+                    Learn More About Dr. Stella
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="container-fluid body_container_6 pt-5 pb-5">
+
+    <div class="container ">
+
+        <div class="row">
+            <h2 class="section_title mx-auto text-center mt-1 mb-5">
+                <span>Reviews</span>
+            </h2>
+        </div>
+
+        <!-- Gallery -->
+        <div class="row video_slider">
+
+            <div class="col-lg-12 col-md-12">
+                <div class="owl-carousel owl-theme">
+                    <div class="col item">
+                        <iframe width="100%" height="800" src="https://www.youtube.com/embed/fqZanGABiAg"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="container-fluid body_container_4 pt-2 pb-2">
+
+    <div class="container">
+
+        <!-- Gallery -->
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+
+                <div class="row TestSec_1">
+                    <div class="col-lg-9 col-md-12 mb-4">
+                        <p class="mb-0">
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <!-- <b class="d-block">Quality</b> --> <br>
+                            After coming down hard with the COVID, I visited the clinic and received her protocol. I
+                            have bounced back and feeling better. Bless the Dr and her staff.
+                            <b class="d-block">Alex (Patient) </b>
+                            <i class="fa fa-quote-right" aria-hidden="true"></i>
+                        </p>
+                        <!-- <span class="star_img"><img src="images/star.gif" alt="" class="img-fluid"></span> -->
+                        <div class="star-rating w-100 mb-3">
+                            <span class="fa fa-star" data-rating="1"></span>
+                            <span class="fa fa-star" data-rating="2"></span>
+                            <span class="fa fa-star" data-rating="3"></span>
+                            <span class="fa fa-star" data-rating="4"></span>
+                            <span class="fa fa-star" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-4 over_h">
+                        <!-- <img src="images/sample-11.jpg" alt="" class="img-fluid"> -->
+                    </div>
+                </div>
+
+                <div class="row TestSec_1">
+                    <div class="col-lg-9 col-md-12 mb-4">
+                        <p class="mb-0">
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <!-- <b class="d-block">Quality</b> --> <br>
+                            Dr. Immanuel helped me immensely in December with prescriptions and medical advice. Called
+                            me back 2 time to check on me!!!!
+                            <b class="d-block">Celeste (Patient) </b>
+                            <i class="fa fa-quote-right" aria-hidden="true"></i>
+                        </p>
+                        <!-- <span class="star_img"><img src="images/star.gif" alt="" class="img-fluid"></span> -->
+                        <div class="star-rating w-100 mb-3">
+                            <span class="fa fa-star" data-rating="1"></span>
+                            <span class="fa fa-star" data-rating="2"></span>
+                            <span class="fa fa-star" data-rating="3"></span>
+                            <span class="fa fa-star" data-rating="4"></span>
+                            <span class="fa fa-star" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-4 over_h">
+                        <!-- <img src="images/sample-11.jpg" alt="" class="img-fluid"> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 mb-4 mb-lg-0">
+
+                <div class="row d-flex flex-column flex-sm-row-reverse TestSec_2">
+                    <div class="col-lg-12 col-md-12 mb-4">
+                        <p class="mb-0">
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <!-- <b class="d-block">Quality</b> --> <br>
+                            God bless you Dr. Stella! May the Lord continue to bless you and protect you. I thank God
+                            for your care and concerns. One of the best doctors.
+                            <b class="d-block">Saundra (Patient) </b>
+                            <i class="fa fa-quote-right" aria-hidden="true"></i>
+                        </p>
+                        <!-- <span class="star_img"><img src="images/star.gif" alt="" class="img-fluid"></span> -->
+                        <div class="star-rating w-100 mb-1">
+                            <span class="fa fa-star" data-rating="1"></span>
+                            <span class="fa fa-star" data-rating="2"></span>
+                            <span class="fa fa-star" data-rating="3"></span>
+                            <span class="fa fa-star" data-rating="4"></span>
+                            <span class="fa fa-star" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 mb-4 over_h">
+                        <img src="{{homeInternal.uriProductLocationLocal}}all_img.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 mb-4 mb-lg-0">
+
+                <div class="row d-flex flex-column flex-sm-row-reverse text-lg-end TestSec_3">
+                    <div class="col-lg-9 col-md-12 mb-4">
+                        <p class="mb-0">
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <!-- <b class="d-block">Quality</b> --> <br>
+                            I am well because of the excellent treatment I received at this clinic in April of this
+                            year. The staff at this facility cares about your recovery and health and offers effective
+                            measures to kill the virus.
+                            <b class="d-block">Lucy (Patient) </b>
+                            <i class="fa fa-quote-right" aria-hidden="true"></i>
+                        </p>
+                        <!-- <span class="star_img"><img src="images/star.gif" alt="" class="img-fluid"></span> -->
+                        <div class="star-rating w-100 mb-3">
+                            <span class="fa fa-star" data-rating="1"></span>
+                            <span class="fa fa-star" data-rating="2"></span>
+                            <span class="fa fa-star" data-rating="3"></span>
+                            <span class="fa fa-star" data-rating="4"></span>
+                            <span class="fa fa-star" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-4 over_h">
+                        <!-- <img src="images/sample-33.jpg" alt="" class="img-fluid"> -->
+                    </div>
+                </div>
+
+                <div class="row d-flex flex-column flex-sm-row-reverse text-lg-end TestSec_3">
+                    <div class="col-lg-9 col-md-12 mb-4">
+                        <p class="mb-0">
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <!-- <b class="d-block">Quality</b> --> <br>
+                            I had a great experience with this clinic, God bless everyone working there, thank you for
+                            your patience and care.
+                            <b class="d-block">Daniel (Patient) </b>
+                            <i class="fa fa-quote-right" aria-hidden="true"></i>
+                        </p>
+                        <!-- <span class="star_img"><img src="images/star.gif" alt="" class="img-fluid"></span> -->
+                        <div class="star-rating w-100 mb-3">
+                            <span class="fa fa-star" data-rating="1"></span>
+                            <span class="fa fa-star" data-rating="2"></span>
+                            <span class="fa fa-star" data-rating="3"></span>
+                            <span class="fa fa-star" data-rating="4"></span>
+                            <span class="fa fa-star" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-4 over_h">
+                        <!-- <img src="images/sample-33.jpg" alt="" class="img-fluid"> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Gallery -->
+
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <a href="/productlist?bestsellers=best" target="_blank" class="btn btn-shop">
+                    Shop Best Sellers
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container-fluid body_container_img" style="background-color: white !important;">
+
+    <div class="container">
+
+        <div class="row">
+            <a href="{{urlPrepareTodayLink1}}">
+                <div class="col-12 col-md-12 col-lg-12 p-0 text-center toh-img-container shop_medical_devices">
+
+                    <img class="img-fluid mb-2 mb-md-0 pos-md-relative for_desktop"
+                        src="{{homeInternal.uriProductLocationLocal}}StorableFood.jpg" alt="">
+                    <img class="img-fluid mb-2 mb-md-0 pos-md-relative for_mobile"
+                        src="{{homeInternal.uriProductLocationLocal}}StorableFood.jpg" alt="">
+
+                </div>
+            </a>
+        </div>
+
+        <div class="row mb-4 pt-4 pb-2">
+            <div class="col-12 text-center">
+                <a href="{{urlPrepareTodayLink1}}" target="_blank" class="btn btn-shop">
+                    Prepare Today
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container-fluid body_container_5 pt-5 pb-5">
+
+    <div class="container">
+
+        <div class="row">
+            <h2 class="section_title section_title_1 mx-auto text-center mt-3 mb-3">
+                <span>Let’s Stay Connected!</span>
+            </h2>
+        </div>
+        <div class="row mt-4 mb-4">
+            <div
+                class="col-lg-6 offset-lg-1 col-md-12 col-12 text-left d-lg-flex flex-lg-column justify-content-lg-center">
+                <p class="mt-2 mb-2">Sign up for discounts, product & medical updates.</p>
+            </div>
+            <div class="col-lg-4 col-md-12 col-12 text-center">
+                <form class="form-subscribe" action="#">
+                    <div class="input-group">
+                        <!-- <input type="email" class="form-control input-lg" placeholder="Your email address"> -->
+
+                        <input type="text" class="form-control input-lg" placeholder="Your email address"
+                            (focusout)="SubscriptionAccept()" name="subscriptionEmail" [(ngModel)]="subsciptionEmail">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success btn-lg" (click)="SubscriptionAccept()"
+                                type="submit">Subscribe</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

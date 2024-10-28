@@ -1,0 +1,105 @@
+@import "../../../app.component.css";
+
+
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+
+#lblCartCount {
+  font-size: 12px;
+  background: #451c1cac;
+  color: #fff;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -10px;
+}
+
+.continue-shopping-button {
+  position: relative;
+  left: 0px;
+}
+
+.btn_custom_color1 {
+  color: #fff;
+  background-color: #6c9ba4;
+  border-color: #6c9ba4;
+}
+
+@media screen {
+  .badge {
+    padding-left: 9px;
+    padding-right: 15px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+
+  #lblCartCount {
+    font-size: 12px;
+    background: #451c1cac;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+  }
+
+  .mob-hamburger-menu-icon {
+    color: #2780a3;
+    text-decoration: none;
+    position: absolute;
+    top: 30px;
+    font-size: 28px;
+  }
+
+  .mob-hamburger-menu-content {
+    position: absolute;
+    background: white;
+    width: 100%;
+    left: 0;
+  }
+
+  .navbar-light .navbar-nav .nav-link{
+    padding: 10px 20px;
+  }
+
+  .dropdown-toggle::after{
+    margin-left: 0.6em;
+  }
+
+  #cartTable tr td{
+    border-bottom: solid 1px #cccccc;
+    padding: 10px 0;
+  }
+
+  #cartTable tr:last-child td{
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .btn-shop-modal{
+    font-size: 16px;
+  }
+
+ /* .mob-hamburger-menu-content a:hover {
+    background:  #2780a3;
+  } */
+
+}
+
+/* @media screen and (max-width: 600px) and (orientation:landscape) 
+{
+    .continue-shopping-button {
+    bottom: -45px;
+    position: relative;
+    left: -25%;
+  }
+} */

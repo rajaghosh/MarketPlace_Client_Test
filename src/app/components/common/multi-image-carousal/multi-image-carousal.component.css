@@ -1,0 +1,114 @@
+/* CAROUSAL 1 START */
+
+.MultiCarousel {
+    float: left;
+    overflow: hidden;
+    padding: 15px;
+    width: 100%;
+    position: relative;
+}
+
+.MultiCarousel .MultiCarousel-inner {
+    transition: 1s ease all;
+    float: left;
+}
+
+.MultiCarousel .MultiCarousel-inner .item {
+    float: left;
+}
+
+.MultiCarousel .MultiCarousel-inner .item>div {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background: #f1f1f1;
+    color: #666;
+}
+
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+    position: absolute;
+    border-radius: 50%;
+    top: calc(50% - 20px);
+    background-color: #6c9ba4;
+}
+
+.MultiCarousel .leftLst {
+    left: 0;
+}
+
+.MultiCarousel .rightLst {
+    right: 0;
+}
+
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+    pointer-events: none;
+    background: #ccc;
+}
+
+/* CAROUSAL 1 END */
+
+
+
+.for_desk {
+    display: block;
+}
+
+.for_mob {
+    display: none;
+}
+
+.multiCarousalBody {
+    height: 300px;
+}
+
+.multiImageHolder {
+    width: 200px;
+}
+
+.multiCarousalImageDisplay {
+    height: 150px;
+    /* width: 120px; */
+}
+
+.multiCarousalText {
+    font-size: 14px;
+}
+
+@media (max-width: 991px) {
+
+    /* .for_desk {
+        display: none;
+    }
+
+    .for_mob {
+        display: block;
+    } */
+
+    .multiCarousalBody {
+        width: 150px;
+        height: 200px;
+
+    }
+
+    .multiCarousalImageDisplay {
+        height: 100px;
+        /* width: 70px; */
+    }
+
+    .multiCarousalText {
+        font-size: 10px;
+    }
+
+
+}
+
+
+::ng-deep .ng-star-inserted {
+    color: #333 !important;
+}
+
+/* ::ng-deep .item .ng-star-inserted{
+    width: 211px;
+} */

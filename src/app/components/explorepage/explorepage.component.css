@@ -1,0 +1,30 @@
+.faq {
+    width: 100%;
+    height: 80vh;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    background-color: #e7f9ff;
+    text-align: justify;
+}
+
+.affliate {
+    width: 100%;
+    height: 80vh;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    background-color: #e7f9ff;
+}
+
+.referral {
+    width: 100%;
+    height: 80vh;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    background-color: #e7f9ff;
+}

@@ -1,0 +1,707 @@
+<div class="container-fluid h-100 pt-0 pb-0 pt-md-2 pb-md-2 header-top">
+  <div class="container">
+    <div class="row header-announcement-bar__content h-100">
+      <div class="col-lg-12 col-md-12 col-12">
+        <p
+          class="header-announcement-bar-text header-announcement-bar-text--desktop d-md-block m-0 w-100 text-uppercase text-center">
+          <!-- <span><i class="fas fa-home"></i>6728 HWY 6 South, Houston, TX 77083</span> 
+              <a href="tel:8328085574"><i class="fas fa-phone-alt"></i>8328085574</a> 
+              <a href="mailto:customerservice@drstellamd.com"><i class="fas fa-envelope"></i>customerservice@drstellamd.com</a> -->
+          <!-- <span>save 5% off your one-time order or 10% off when subscribe.</span> -->
+          <span>Save 10% when you sign up for Autoship <a href="/autoship-order/" target="_blank"
+              style="color:darkslategrey"><u>CLICK HERE</u></a></span>
+        </p>
+      </div>
+      <!-- <div class="col-lg-4 col-md-4 col-12 text-end">
+            <p class="header-announcement-bar-text header-announcement-bar-text--desktop d-md-block m-0 w-100"> 
+              <a href="https://www.facebook.com/drstella.gwp" target="_blank" class="facebook" title="facebook">
+                  <i class="fa fa-facebook-square" aria-hidden="true"></i>
+              </a>
+              <a target="_blank" class="youtube social-icon" href="https://www.youtube.com/user/firpowerministries" title="Youtube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </p>
+          </div> -->
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top-custom">
+
+  <div class="container nav_box">
+    <a class="navbar-brand" href="index.html">
+      <img src="../../../../assets/images/dr_stella1.png" class="img-fluid" alt="logo" style="border: 1px solid white">
+    </a>
+
+    <!-- <span class="navbar-text search_icon for_mob" data-bs-toggle="modal" data-bs-target="#CartModal" title="Search">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span> -->
+    <span *ngIf="!(isCustomer || isAutoshipPage)" class="navbar-text user_icon for_mob" data-bs-toggle="modal"
+      data-bs-target="#UnsubscribeAutoshipModalLabel" title="Login">
+      <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
+      <i class="fa fa-sign-in" aria-hidden="true"></i>
+    </span>
+
+    <span *ngIf="isCustomer" class="navbar-text user_icon for_mob" title="sign-out" (click)="customerSignOut()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+    </span>
+
+    <span *ngIf="!(isCustomer || isAutoshipPage)" class="navbar-text cart_icon for_mob " data-bs-toggle="modal"
+      data-bs-target="#CartModal" title="Cart" (click)="CheckCartCount()" style="padding-right:12px">
+      <i class="fa fa-cart-plus" aria-hidden="true"></i>
+      <span class='cart_badge badge pr-5' id='lblCartCount'>{{productInternal.varProductCount}}</span>
+    </span>
+
+    <span *ngIf="(productInternalOperation.varSelectedSupplements.length == 3)" class="navbar-text cart_icon for_mob"
+      title="Supplement Cart" data-bs-toggle="modal" data-bs-target="#SupplementCartModel"
+      (click)="OpenSupplementSummary()">
+      <!-- <img class=" img-fluid" src="../../../assets/images/supplement-cart.svg" alt=""
+        style="height: 30px;  position: relative;  top: -3px;"> -->
+      <i class="fa fas fa-bell" aria-hidden="true"></i>
+      <span class='cart_badge badge' id='lblCartCount'>{{productInternalOperation.varSelectedSupplements.length}}</span>
+    </span>
+
+    <!-- MOB VIEW -->
+    <div *ngIf="!(isCustomer)" class="menu-container user_icon for_mob" clickOutside (clickOutside)="clickedOutside()">
+      <div class="menu-toggler" (click)="toggleMenu()">
+        <a href="javascript:void(0);" class="icon mob-hamburger-menu-icon">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+      <div class="menu" *ngIf="isMenuOpened">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 mob-hamburger-menu-content">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index">Home</a>
+          </li>
+          <li class="nav-item dropdown" id="myDropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:voide(0);">Shop</a>
+            <ul class="dropdown-menu" style="width : 250px; padding-right: 20px;">
+              <li>
+                <a href="productlist?category=All" class="nav-link dropdown-item">
+                  Shop All
+                </a>
+              </li>
+              <li>
+                <a href="productlist?category=Supplements" class="nav-link dropdown-item">
+                  Supplements
+                </a>
+              </li>
+              <li>
+                <a href="productlist?category=MedicinalHerb" class="nav-link dropdown-item">
+                  Medicinal Herb
+                </a>
+              </li>
+              <li>
+                <a href="productlist?category=Bundles&Kits" class="nav-link dropdown-item">
+                  Bundles and kits
+                </a>
+              </li>
+              <li>
+                <a href="productlist?category=MedicalDevices" class="nav-link dropdown-item">
+                  Medical Devices
+                </a>
+              </li>
+              <li>
+                <a href="productlist?category=SkinAndHairCare" class="nav-link dropdown-item">
+                  Skin And Hair Care
+                </a>
+              </li>
+              <li>
+                <a href="autoship-order" class="nav-link dropdown-item">
+                  Autoship
+                </a>
+              </li>
+              <li>
+                <a href="productlist?category=T-Shirt" class="nav-link dropdown-item">
+                  T-Shirts
+                </a>
+              </li>
+              <li>
+                <a href="/productlist?product=5" class="nav-link dropdown-item">
+                  Let America Live
+                </a>
+              </li>
+              <li>
+                <a href="/productlist?category=GummyVitamins" class="nav-link dropdown-item">
+                  Gummy Vitamins
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" id="myDropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:voide(0);">Explore</a>
+            <ul class="dropdown-menu" style="padding-right: 20px;">
+              <li>
+                <a href="/explore?section=affliate" class="nav-link dropdown-item">
+                  about becoming affiliate
+                </a>
+              </li>
+              <li>
+                <a href="/explore?section=referral" class="nav-link dropdown-item">
+                  referral program
+                </a>
+              </li>
+              <li>
+                <a href="/explore?section=faq" class="nav-link dropdown-item">
+                  FAQs
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://drstellamd.com/telehealth-services/" target="_blank">Telehealth</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DESKTOP VIEW -->
+    <div *ngIf="!(isCustomer)" class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <!-- <a class="nav-link active" aria-current="page" href="index">Home</a> -->
+          <a class="nav-link" aria-current="page" href="index">Home</a>
+        </li>
+        <li class="nav-item dropdown" id="myDropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:voide(0);">Shop</a>
+          <ul class="dropdown-menu" style="width : 250px; padding-right: 20px;">
+            <li>
+              <a href="productlist?category=All" class="nav-link dropdown-item">
+                Shop All
+              </a>
+            </li>
+            <li>
+              <a href="productlist?category=Supplements" class="nav-link dropdown-item">
+                Supplements
+              </a>
+            </li>
+            <li>
+              <a href="productlist?category=MedicinalHerb" class="nav-link dropdown-item">
+                Medicinal Herb
+              </a>
+            </li>
+            <li>
+              <a href="productlist?category=Bundles&Kits" class="nav-link dropdown-item">
+                Bundles and kits
+              </a>
+            </li>
+            <li>
+              <a href="productlist?category=MedicalDevices" class="nav-link dropdown-item">
+                Medical Devices
+              </a>
+            </li>
+            <li>
+              <a href="productlist?category=SkinAndHairCare" class="nav-link dropdown-item">
+                Skin And Hair Care
+              </a>
+            </li>
+            <li>
+              <a href="autoship-order" class="nav-link dropdown-item">
+                Autoship
+              </a>
+            </li>
+            <li>
+              <a href="productlist?category=T-Shirt" class="nav-link dropdown-item">
+                T-Shirts
+              </a>
+            </li>
+            <li>
+              <a href="/productlist?product=5" class="nav-link dropdown-item">
+                Let America Live
+              </a>
+            </li>
+            <li>
+              <a href="/productlist?category=GummyVitamins" class="nav-link dropdown-item">
+                Gummy Vitamins
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" id="myDropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:voide(0);">Explore</a>
+          <ul class="dropdown-menu" style="padding-right: 20px;">
+            <li>
+              <a href="/explore?section=affliate" class="nav-link dropdown-item">
+                about becoming affiliate
+              </a>
+            </li>
+            <li>
+              <a href="/explore?section=referral" class="nav-link dropdown-item">
+                referral program
+              </a>
+            </li>
+            <li>
+              <a href="/explore?section=faq" class="nav-link dropdown-item">
+                FAQs
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://drstellamd.com/telehealth-services/" target="_blank">Telehealth</a>
+        </li>
+        <!-- <li class="nav-item">
+              <a class="nav-link" href="https://drstellamd.com/blog/" target="_blank">My Blog</a>
+            </li> -->
+      </ul>
+    </div>
+
+
+    <span *ngIf="!(isCustomer || isAutoshipPage)" class="navbar-text user_icon for_desk" data-bs-toggle="modal"
+      data-bs-target="#UnsubscribeAutoshipModalLabel" title="Login">
+      <i class="fa fa-sign-in" aria-hidden="true"></i>
+    </span>
+
+    <span *ngIf="isCustomer" class="navbar-text user_icon for_desk" title="sign-out" (click)="customerSignOut()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+    </span>
+
+    <span *ngIf="!(isCustomer || isAutoshipPage)" class="navbar-text cart_icon for_desk" data-bs-toggle="modal"
+      data-bs-target="#CartModal" title="Cart" (click)="CheckCartCount()">
+      <i class="fa fa-cart-plus" aria-hidden="true"></i>
+      <span class='cart_badge badge' id='lblCartCount'>{{productInternal.varProductCount}}</span>
+    </span>
+
+    <span *ngIf="(productInternalOperation.varSelectedSupplements.length == 3)" class="navbar-text cart_icon for_desk"
+      title="Supplement Cart" data-bs-toggle="modal" data-bs-target="#SupplementCartModel"
+      (click)="OpenSupplementSummary()">
+      <!-- <img class=" img-fluid" src="../../../assets/images/supplement-cart.svg" alt=""
+        style="height: 30px;  position: relative;  top: -3px;"> -->
+      <i class="fa fas fa-bell" aria-hidden="true"></i>
+      <span class='cart_badge badge' id='lblCartCount'>{{productInternalOperation.varSelectedSupplements.length}}</span>
+    </span>
+    <!-- THIS IS DUMMY SPACE TO MAINTAIN CONSISTANCY -->
+    <span *ngIf="(isAutoshipPage && productInternalOperation.varSelectedSupplements.length < 3)"
+      class="navbar-text-blank cart_icon for_desk" title="Supplement Cart">
+    </span>
+
+  </div>
+</nav>
+
+
+<!-- Unsubscribe Autoship Modal -->
+
+<div class="modal fade modal_design" id="UnsubscribeAutoshipModalLabel" tabindex="-1"
+  aria-labelledby="UnsubscribeAutoshipModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="UnsubscribeAutoshipModalLabel">Customer&nbsp;Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          id="CloseUnsubscribeAutoship">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+
+      <div class="modal-body body_container">
+        <mat-dialog-content [formGroup]="formGroupEmailToGetOtp">
+
+          <div class="container-fluid pt-1 pb-5 pl-5">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+              <div class="row ">
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                  <mat-form-field appearance="standard" [style.width.px]=280>
+                    <mat-label>Email <span style="color: red;">*</span></mat-label>
+                    <input matInput maxlength="100" inputmode="email" placeholder="Type name"
+                      formControlName="EmailForOtp" [readonly]="isMakeEmailReadonly" #nameInput>
+                    <mat-error *ngIf="checkError('EmailForOtp', 'required')">Email is
+                      required</mat-error>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 pt-3">
+                  <mat-dialog-actions>
+                    <button class="btn-shop-modal" type="submit" (click)="GetOtp()" [disabled]="isMakeEmailReadonly">Get
+                      OTP</button>
+                  </mat-dialog-actions>
+
+                </div>
+              </div>
+              <div *ngIf="isOtpMessage" class="pt-2">
+                {{emailMessage}}
+              </div>
+            </div>
+          </div>
+        </mat-dialog-content>
+
+        <mat-dialog-content [formGroup]="formGroupSubmitOtp" *ngIf="isMakeEmailReadonly">
+
+          <div class="container-fluid pt-1 pb-5 pl-5 body_container">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+              <div class="row ">
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                  <mat-form-field appearance="standard" [style.width.px]=280>
+                    <mat-label>OTP <span style="color: red;">*</span></mat-label>
+                    <input matInput maxlength="100" inputmode="numeric" placeholder="Type name"
+                      formControlName="OtpReceived" #nameInput>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 pt-3">
+                  <mat-dialog-actions>
+                    <button class="btn-shop-modal" type="submit" (click)="SubmitOtp()">Submit
+                      OTP</button>
+                  </mat-dialog-actions>
+                </div>
+                <div *ngIf="isOtpMismatch" class="pt-2">
+                  {{otpMismatchMessage}}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </mat-dialog-content>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Cart Modal -->
+<div class="modal fade modal_design" id="CartModal" aria-hidden="true" aria-labelledby="CartModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel" *ngIf="productInternal.varIsCartEmpty">Cart Is Empty</h5>
+        <h5 class="modal-title" id="exampleModalToggleLabel" *ngIf="!productInternal.varIsCartEmpty">Cart
+          ({{productInternal.varProductCount}})</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body" style=" overflow-y: auto;">
+
+        <!-- DESKTOP VIEW -->
+        <div class="table-responsive user_icon for_desk" id="cartContainer">
+          <table class="cart__table" id="cartTable" *ngIf="!productInternal.varIsCartEmpty">
+            <thead>
+              <tr>
+                <th><b>Product</b></th>
+                <th><b>Title</b></th>
+                <th class="text-center"><b>Quantity</b></th>
+                <th class="text-center"><b>Price</b></th>
+                <th class="text-end"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="0" *ngFor="let cartProduct of productInternal.objProductsInCart">
+                <td>
+                  <div class="cart__img" style="width: 100px; height:auto;">
+                    <a href="/productlist?product={{cartProduct.Product.Id}}">
+                      <img src="{{productInternal.uriProductLocationCloud}}{{cartProduct.Product.ImagePath}}" alt=""
+                        class="img-fluid">
+                    </a>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                    {{cartProduct.Product.Name.split(":")[0]}}&nbsp;
+                  </div>
+
+                  <div *ngIf="(cartProduct.SelectedSubscription != undefined)">
+                    {{cartProduct.Product.Name.split(":")[0]}}:&nbsp;
+                  </div>
+
+                  <div>
+                    <span
+                      *ngIf="(cartProduct.Product.ProductColors!=undefined && cartProduct.Product.ProductColors.length>0)">
+                      {{cartProduct.Product.ProductColors[0].Name}}/
+                    </span>
+                    <span
+                      *ngIf="(cartProduct.Product.ProductSizes!=undefined && cartProduct.Product.ProductSizes.length>0)">
+                      {{cartProduct.Product.ProductSizes[0].Name}}
+                    </span>
+                  </div>
+
+                  <div class="star-rating w-100 mb-1">
+                    <span class="fa fa-star" data-rating="1"></span>
+                    <span class="fa fa-star" data-rating="2"></span>
+                    <span class="fa fa-star" data-rating="3"></span>
+                    <span class="fa fa-star" data-rating="4"></span>
+                    <span class="fa fa-star" data-rating="5"></span>
+                    <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                  </div>
+
+                  <div *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                    ${{ GetProductPrice(cartProduct.FinalAmount,cartProduct.ProductCount).toFixed(2) }}
+                  </div>
+
+                  <div *ngIf="(cartProduct.SelectedSubscription != undefined)">
+                    ({{cartProduct.SelectedSubscription.CycleValue}} Time per
+                    {{cartProduct.SelectedSubscription.CycleType.replace("ly","")}}):&nbsp;<span
+                      style="text-decoration: line-through;">${{cartProduct.Product.ProductSubscriptions[0].DisplayPrice.toFixed(2)}}</span>&nbsp;${{cartProduct.FinalAmount.toFixed(2)}}
+                  </div>
+                </td>
+                <td class="text-center">
+                  <div class="cart__quantity">
+                    <button type="button"
+                      (click)="Fn_QuantityMinus(cartProduct.Product.Id, cartProduct.Product.ProductColors, cartProduct.Product.ProductSizes)"
+                      *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                      <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+                    <input type="text" id="quantity_0" value="{{cartProduct.ProductCount}}" spellcheck="false"
+                      data-ms-editor="true">
+                    <button type="button"
+                      (click)="Fn_QuantityPlus(cartProduct.Product.Id, cartProduct.Product.ProductColors, cartProduct.Product.ProductSizes)"
+                      *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <span class="cart__price" id="displayPrice_0">${{cartProduct.FinalAmount.toFixed(2)}}</span>
+
+                </td>
+                <td class="text-end">
+                  <button type="button" class="cart__delete"
+                    (click)="Fn_DeleteProduct(cartProduct.Product.Id, cartProduct.Product.ProductColors, cartProduct.Product.ProductSizes)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+                      <line x1="368" y1="368" x2="144" y2="144"
+                        style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"></line>
+                      <line x1="368" y1="144" x2="144" y2="368"
+                        style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"></line>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="cart__table" id="cartTable" *ngIf="productInternal.varIsCartEmpty">
+            <tr id="0">
+              <td>
+                <div class="col-12 text-center">
+                  No product in Cart.
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- MOBILE VIEW  -->
+        <div class="table-responsive user_icon for_mob" id="cartContainer">
+          <table class="" id="cartTable" style="width:95%">
+            <thead>
+            </thead>
+            <tbody>
+              <tr id="0" *ngFor="let cartProduct of productInternal.objProductsInCart">
+                <td>
+                  <div class="row px-0 pb-1 pt-1">
+                    <div class="col-4">
+
+                      <div class="cart__img__mob pb-5 text-center col-12" style="margin: 0 auto !important;">
+
+                        <a href="/productlist?product={{cartProduct.Product.Id}}">
+                          <img src="{{productInternal.uriProductLocationCloud}}{{cartProduct.Product.ImagePath}}" alt=""
+                            class="img-fluid" style="height:90px; width: 90px;">
+                        </a>
+
+                      </div>
+                      <div class="col-12 pt-2 pb-2 pl-2 pr-2 text-center">
+                        <div class="cart__quantity text-center p-0"
+                          *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                          <button type="button"
+                            (click)="Fn_QuantityMinus(cartProduct.Product.Id, cartProduct.Product.ProductColors, cartProduct.Product.ProductSizes)"
+                            *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                          </button>
+                          <input type="text" id="quantity_0" value="{{cartProduct.ProductCount}}" spellcheck="false"
+                            style="width:40px" data-ms-editor="true">
+                          <button type="button"
+                            (click)="Fn_QuantityPlus(cartProduct.Product.Id, cartProduct.Product.ProductColors, cartProduct.Product.ProductSizes)"
+                            *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-8">
+
+                      <div class="col-12">
+                        <div class="row">
+
+
+
+                          <div class="col-12 pb-1">
+                            <div class="text-end" style="height: 1px;">
+                              <a href="javascript:void(0)" style="position: relative; top: 0px; right: -15px;"
+                                (click)="Fn_DeleteProduct(cartProduct.Product.Id, cartProduct.Product.ProductColors, cartProduct.Product.ProductSizes)">
+                                <img class=" img-fluid" src="../../../assets/images/product-close.svg" alt=""
+                                  style="height: 24px;">
+                              </a>
+                            </div>
+
+                            <div *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                              {{cartProduct.Product.Name.split(":")[0]}}&nbsp;
+                            </div>
+
+                            <div *ngIf="(cartProduct.SelectedSubscription != undefined)">
+                              {{cartProduct.Product.Name.split(":")[0]}}:&nbsp;
+                            </div>
+
+                            <div>
+                              <span
+                                *ngIf="(cartProduct.Product.ProductColors!=undefined && cartProduct.Product.ProductColors.length>0)">
+                                {{cartProduct.Product.ProductColors[0].Name}}/
+                              </span>
+                              <span
+                                *ngIf="(cartProduct.Product.ProductSizes!=undefined && cartProduct.Product.ProductSizes.length>0)">
+                                {{cartProduct.Product.ProductSizes[0].Name}}
+                              </span>
+                            </div>
+
+                            <div class="star-rating w-100 mb-1">
+                              <span class="fa fa-star" data-rating="1"></span>
+                              <span class="fa fa-star" data-rating="2"></span>
+                              <span class="fa fa-star" data-rating="3"></span>
+                              <span class="fa fa-star" data-rating="4"></span>
+                              <span class="fa fa-star" data-rating="5"></span>
+                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                            </div>
+
+                            <div *ngIf="(cartProduct.SelectedSubscription == undefined)">
+                              ${{ GetProductPrice(cartProduct.FinalAmount,cartProduct.ProductCount).toFixed(2)
+                              }}&nbsp;x&nbsp;{{cartProduct.ProductCount}}=${{cartProduct.FinalAmount.toFixed(2)}}
+                            </div>
+
+                            <div *ngIf="(cartProduct.SelectedSubscription != undefined)">
+                              ({{cartProduct.SelectedSubscription.CycleValue}} Time per
+                              {{cartProduct.SelectedSubscription.CycleType.replace("ly","")}}):&nbsp;<span
+                                style="text-decoration: line-through;">${{cartProduct.Product.ProductSubscriptions[0].DisplayPrice.toFixed(2)}}</span>&nbsp;${{cartProduct.FinalAmount.toFixed(2)}}
+                            </div>
+
+
+
+
+                          </div>
+
+
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+
+                </td>
+              </tr>
+
+              <tr id="0" *ngIf="productInternal.varIsCartEmpty">
+                <td>
+                  <div class="col-12 text-center">
+                    No product in Cart.
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+        </div>
+
+
+      </div>
+      <div class="modal-footer" style="padding-top: 0px;padding-bottom: 0px;padding-left: 10px;padding-right: 10px;">
+
+
+        <div class="row px-1 pb-3 pt-3" style="width:100%;">
+          <div class="col-7 text-start" style="font-size: 25px;">
+            <!-- <button class="btn-shop-modal text-start" data-bs-dismiss="modal">Continue&nbsp;Shopping</button> -->
+            <sup style="font-size: 15px;">$</sup>{{productInternal.varTotalAmount.toFixed(2)}}&nbsp;
+          </div>
+
+
+          <div class="col-5 text-end">
+            <!-- <button class="btn-shop-modal" data-bs-dismiss="modal" (click)="CallProductCheckOutAddressDetails()"
+              [disabled]="productInternal.isCheckOutButtonDisabled">Check&nbsp;Out</button> -->
+
+            <button class="btn-shop-modal-disabled" *ngIf="productInternal.isCheckOutButtonDisabled">Checkout</button>
+            <button class="btn-shop-modal" data-bs-dismiss="modal" (click)="CallProductCheckOutAddressDetails()"
+              *ngIf="!productInternal.isCheckOutButtonDisabled">Checkout</button>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTOSHIP MODAL -->
+<div class="modal fade modal_design" id="SupplementCartModel" aria-hidden="true"
+  aria-labelledby="SupplementCartModelLabel" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel" style="font-size: 15px;">Supplement Summary</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="cartContainer">
+          <div *ngFor="let cartProduct of productInternal.objCheckOutSupplementProductList">
+            <div class="row px-0 pb-1 pt-1">
+              <div class="col-4">
+                <div class="cart__img__mob pb-5 text-center col-12" style="margin: 0 auto !important;">
+                  <a href="/productlist?product={{cartProduct.Product.Id}}">
+                    <img src="{{productInternal.uriProductLocationCloud}}{{cartProduct.Product.ImagePath}}" alt=""
+                      class="img-fluid">
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-8">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12 pb-1">
+                      <div>
+                        <span style="font-size: 12px;">
+                          {{cartProduct.Product.Name.split(":")[0]}}&nbsp;
+                        </span>
+                      </div>
+                      <!-- <div>
+                        <span style="font-size: 12px;">
+                          ${{cartProduct.Product.Price}}&nbsp;
+                        </span>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="padding-top: 0px; padding-bottom: 0px; padding-left: 2px; padding-right: 2px; border-top: 1px solid #cccccc;">
+
+            <div class="row px-1 pb-3 pt-3" style="width:100%;">
+              <div class="col-12 text-start" style="font-size: 15px;">Package Bundle @ $99.00
+                <!-- <sup style="font-size: 15px;">$</sup>{{supplementProductTotal.toFixed(2)}}&nbsp; -->
+              </div>
+              <div class="col-12 text-end pt-2">
+                <button class="btn-shop-modal" data-bs-dismiss="modal" (click)="CheckOutSupplement()">Buy Now</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

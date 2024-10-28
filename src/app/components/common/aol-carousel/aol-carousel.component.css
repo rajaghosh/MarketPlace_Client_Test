@@ -1,0 +1,59 @@
+p {
+    font-family: Lato;
+}
+
+.slide img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.slide .title {
+    margin-bottom: 0;
+    font-size: 1em;
+    padding: 1.5em 0.5em 1.5em 0.5em;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    text-transform: uppercase;
+}
+
+.arrow-height-left {
+    display: inline;
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    /* background-color: blue; */
+}
+
+.arrow-height-right {
+    display: inline;
+    position: absolute;
+    top: 55%;
+    right: 25%;
+    /* background-color: blue; */
+}
+
+@media (max-width: 990px) {
+    .arrow-height-left {
+        display: inline;
+        position: absolute;
+        top: 30%;
+        left: 25%;
+        /* background-color: blue; */
+    }
+
+    .arrow-height-right {
+        display: inline;
+        position: absolute;
+        top: 30%;
+        right: 25%;
+        /* background-color: blue; */
+    }
+
+
+}

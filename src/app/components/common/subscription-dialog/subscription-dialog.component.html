@@ -1,0 +1,241 @@
+<mat-dialog-content *ngIf="isNormalCartControl">
+    <p>
+        {{message}}
+    </p>
+</mat-dialog-content>
+
+<!-- THIS WORKS AS THE CART BUTTON INVOKER BUT WILL BE HIDDEN FROM SCREEN -->
+<mat-dialog-actions style="display: none; height:0px; width:0px;">
+    <button type="hidden" id="auto_trigger" data-bs-toggle="modal" data-bs-target="#CartModal" class="btn-shop">OPEN
+        CART 2</button>
+</mat-dialog-actions>
+
+<mat-dialog-actions *ngIf="isNormalCartControl">
+    <div class="container" *ngIf="isNormalCartControl" align="center">
+        <div class="row">
+            <div class="col-md-12">
+                <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1"
+                    *ngIf="isDisplayOKButton()">{{confirmButtonText}}</button>
+                <button mat-raised-button mat-dialog-close tabindex="-1"
+                    *ngIf="isDisplayCancelButton()">{{cancelButtonText}}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div align="center" *ngIf="spinnerOn">
+                    <mat-spinner diameter="40" color="ThemePalette"></mat-spinner>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>
+
+<mat-dialog-actions *ngIf="isSubscriptionControl" class="pt-0 pl-0 pb-0 pr-0 subscriptionStyle">
+    <div class="pl-1 pr-1" *ngIf="isSubscriptionControl" style="width:500px;" align="left">
+        <div class="col-lg-12 col-md-12 col-sm-12 pl-5 pr-5">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 pl-1 pr-1 pb-3 pt-3"
+                    style="background-color: #2780a3; color: #fff">
+                    <div class="row">
+                        <div class="col-10">
+                            <span style="font-weight: 500;">
+                                {{productInternal.FuncGetNamePartFromNameString(subscriptionMainProduct.Name)}}
+                            </span>
+                        </div>
+                        <div class="col-2" style="text-align: right;" (click)="CloseDialog()">
+                            <button
+                                style="font-weight: 500; background-color: #2780a3; color: #fff; border:0px">X</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 pl-5 pr-5 pt-2">
+
+
+                    <div class="px-2">
+
+                        <mat-radio-group class="product_subscription_radio_group" [(ngModel)]="selectedSubscription">
+
+                            <mat-radio-button class="product_subscription_radio_button"
+                                *ngFor="let subscription of currentSubscripion" [value]="subscription">
+
+                                <div *ngIf="IsMainProductSubscription(subscription.SubscriptionId)">
+                                    <div class="container pt-2 pb-2">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="row px-1">
+                                                    <span style="font-weight: 500;" class="p-0">[Regular
+                                                        Order]</span> Price -
+                                                    ${{subscription.Price}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="!IsMainProductSubscription(subscription.SubscriptionId)">
+                                    <div class="container px-3  pt-2 pb-2">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6"
+                                                style="white-space: normal; margin-bottom: 5px;">
+                                                <span style="font-weight: 500;">[Subscription]</span>
+                                                : {{subscription.CycleValue}} Time
+                                                per
+                                                {{subscription.CycleType.replace("ly","")}}
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                Price :
+                                                {{subscription.DiscountPercentage}}% Off <span
+                                                    style="text-decoration: line-through; padding: 0 8px; color: gray;">{{subscription.DisplayPrice.toFixed(2)}}</span>
+                                                ${{productInternal.FuncGetDiscountedPrice(subscription.DisplayPrice,
+                                                subscription.DiscountPercentage)}}
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </mat-radio-button>
+                        </mat-radio-group>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 pl-2 pr-2 pb-2 button-set-desk"
+            style="border-top: 0px solid #cccccc; width: 100%;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 pl-0 pr-0 pb-2 pt-2 modal-footer"
+                    style="padding-left: 0px; padding-right: 0px;">
+                    <div class="row" style="width:100%; padding-left: 0px; padding-right: 0px;">
+                        <div class="col-7 text-start pl-0 pr-0" style="padding-left: 0px; padding-right: 0px;">
+                            <button class="btn-shop-modal" data-bs-toggle="modal"
+                                (click)="GoToProductId(subscriptionMainProduct.Id)" data-bs-dismiss="modal">
+                                Product&nbsp;Description</button>
+                        </div>
+                        <div class="col-5 text-end pl-0 pr-0" style="padding-left: 0px; padding-right: 0px;">
+                            <button class="btn-shop-modal" data-bs-target="#CartModal" data-bs-toggle="modal"
+                                (click)="CloseAfterSubscriptionSelection(subscriptionMainProduct)"
+                                data-bs-dismiss="modal">
+                                Place&nbsp;Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</mat-dialog-actions>
+
+<mat-dialog-actions *ngIf="isColorSizeControl" class="pt-0 pl-0 pb-0 pr-0 subscriptionStyle">
+    <div class="pl-1 pr-1" *ngIf="isColorSizeControl" style="width:400px;" align="left">
+        <div class="col-lg-12 col-md-12 col-sm-12 pl-5 pr-5">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 pl-1 pr-1 pb-3 pt-3"
+                    style="background-color: #2780a3; color: #fff">
+                    <div class="row">
+                        <div class="col-10">
+                            <span style="font-weight: 500;">
+                                Color-Size
+                            </span>
+                        </div>
+                        <div class="col-2" style="text-align: right;" (click)="CloseDialog()">
+                            <button
+                                style="font-weight: 500; background-color: #2780a3; color: #fff; border:0px">X</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 pl-5 pr-5 pt-2 pb-1">
+                    <div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-lg-12 pb-1 pt-2">
+                                <div class="row">
+                                    <div class="col-2 pt-3" style="text-align:right;">
+                                        <mat-label>Color&nbsp;: </mat-label>
+                                    </div>
+
+                                    <div class="col-10 ">
+                                        <mat-form-field appearance="fill">
+                                            <select matNativeControl required
+                                                (change)="UpdateProductColor(productColorsValue.value)"
+                                                #productColorsValue>
+                                                <option *ngFor="let colors of productColors;" [ngValue]="colors.Id">
+                                                    &nbsp;&nbsp;{{colors.Name}}&nbsp;
+                                                </option>
+                                            </select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-lg-12 pb-1">
+                                <div class="row">
+                                    <div class="col-2 pt-3" style="text-align:right;">
+                                        <mat-label>Size&nbsp;: </mat-label>
+                                    </div>
+                                    <div class="col-10 ">
+                                        <mat-form-field appearance="fill">
+                                            <select matNativeControl required
+                                                (change)="UpdateProductSize(productSizesValue.value)"
+                                                #productSizesValue>
+                                                <option *ngFor="let sizes of productSizes;" [ngValue]="sizes.Id">
+                                                    &nbsp;&nbsp;{{sizes.Name}}&nbsp;
+                                                </option>
+                                            </select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-1 pb-3">
+                        <!-- FOR ANY SUBSCRIPTION FROM MAIN SCREEN-->
+                        <button class="btn-shop-modal-disabled"
+                            *ngIf="!isProductColorSizeButtonEnable && (currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0) && !isSubcriptionOpenedFromDescription">
+                            Add&nbsp;To&nbsp;Cart</button>
+                        <button class="btn-shop-modal"
+                            (click)="OpenSubscriptionDialogAfterColorSizeSelect(currentProductForColorSize)"
+                            *ngIf="isProductColorSizeButtonEnable && (currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0) && !isSubcriptionOpenedFromDescription">
+                            Add&nbsp;To&nbsp;Cart</button>
+
+                        <!-- FOR ANY SUBSCRIPTION FROM PRODUCT DETAILS SCREEN-->
+                        <button class="btn-shop-modal-disabled"
+                            *ngIf="!isProductColorSizeButtonEnable && (currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0) && isSubcriptionOpenedFromDescription">
+                            Add&nbsp;To&nbsp;Cart</button>
+                        <button class="btn-shop-modal"
+                            (click)="OpenSubscriptionDialogAfterColorSizeSelect(currentProductForColorSize)"
+                            *ngIf="isProductColorSizeButtonEnable && (currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0) && isSubcriptionOpenedFromDescription">
+                            Add&nbsp;To&nbsp;Cart</button>
+
+                        <!-- FOR NO SUBSCRIPTION -->
+                        <button class="btn-shop-modal-disabled"
+                            *ngIf="!isProductColorSizeButtonEnable && !(currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0)">
+                            Add&nbsp;To&nbsp;Cart</button>
+                        <button class="btn-shop-modal" (click)="CloseColorSizeDialog(currentProductForColorSize)"
+                            data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#CartModal"
+                            *ngIf="isProductColorSizeButtonEnable && !(currentProductForColorSize.ProductSubscriptions!=undefined && currentProductForColorSize.ProductSubscriptions.length > 0)">
+                            Add&nbsp;To&nbsp;Cart</button>
+
+                        <label *ngIf="!isProductColorSizeButtonEnable">&nbsp;(Please select values)</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</mat-dialog-actions>

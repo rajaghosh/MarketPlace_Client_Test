@@ -1,0 +1,19 @@
+<div class="aol-carousel" (mouseenter)="pause()" (mouseleave)="onMouseLeave()" (swipeleft)="prevSlide()"
+    (swiperight)="nextSlide()">
+
+    <div class="carousel-inner">
+        <div *ngFor="let item of items; index as itemIndex" class="carousel-item"
+            [class.active]="itemIndex === activeIndex">
+            <ng-container [ngTemplateOutlet]="item.tpl"></ng-container>
+        </div>
+    </div>
+
+    <a class="carousel-control-prev" role="button" (click)="prevSlide()">
+        <span aria-hidden="true" class="carousel-control-prev-icon arrow-height-left"></span>
+    </a>
+
+    <a class="carousel-control-next" role="button" (click)="nextSlide()">
+        <span aria-hidden="true" class="carousel-control-next-icon arrow-height-right"></span>
+    </a>
+
+</div>

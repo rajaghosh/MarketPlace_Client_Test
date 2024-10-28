@@ -1,0 +1,38 @@
+<div class="container for_desk">
+    <div class="row">
+        <div class="MultiCarousel" data-items="2,4,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner" [style.width.px]="carousalWidth">
+                <div *ngFor="let product of resultDataList">
+                    <div class="item multiImageHolder">
+                        <div class="pad15 multiCarousalBody">
+                            <span >
+                                <a href="/productlist?product={{product.Id}}">
+                                    <img src="{{productInternal.uriProductLocationCloud}}{{product.ImagePath}}" alt=""
+                                        class="img-fluid multiCarousalImageDisplay"></a>
+                            </span>
+                            <p></p>
+                            <p class="multiCarousalText">${{product.Price.toFixed(2)}}</p>
+                            <p class="multiCarousalText">{{product.Name.split(":")[0]}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn border leftLst">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <button class="btn border rightLst">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- ********************************************************************************************************* -->

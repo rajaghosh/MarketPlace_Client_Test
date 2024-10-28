@@ -1,0 +1,77 @@
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #0e789b !important;
+}
+
+.btn-shop-modal {
+    background: #2780a3;
+    color: #fff;
+    padding: 10px;
+    max-width: fit-content;
+    width: 100%;
+    border-radius: 1px;
+    min-width: 100px;
+    text-decoration: none;
+    font-size: small;
+    border: 0px;
+    height: 85%;
+  }
+  
+  .btn-shop-modal:hover {
+    color: #2780a3;
+    background: #fff;
+    border: solid 1px #2780a3;
+  }
+  
+  .btn-shop-modal-light {
+    background: #70bddb;
+    color: #fff;
+    padding: 10px;
+    max-width: fit-content;
+    width: 100%;
+    border-radius: 0;
+    min-width: 100px;
+    text-decoration: none;
+    font-size: small;
+    border: 0px;
+  }
+  
+  .btn-shop-modal-light:hover {
+    color: #4ba8cd;
+    background: #fff;
+    border: solid 1px #4ba8cd;
+  }
+  
+  .btn-shop-modal-light-inverted {
+    color: #4ba8cd;
+    background: #fff;
+    padding: 10px;
+    max-width: fit-content;
+    width: 100%;
+    border-radius: 0;
+    min-width: 100px;
+    text-decoration: none;
+    font-size: small;
+    border: solid 1px #4ba8cd;
+  }
+  
+  .btn-shop-modal-light-inverted:hover {
+  
+    background: #70bddb;
+    color: #fff;
+    border: 0px;
+  
+  }
+  
+  .btn-shop-modal-disabled {
+    background: #cde1e9;
+    color: #fff;
+    padding: 10px;
+    max-width: fit-content;
+    width: 100%;
+    border-radius: 1px;
+    min-width: 100px;
+    text-decoration: none;
+    font-size: small;
+    border: 0px;
+    height: 85%;
+  }
